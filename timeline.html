@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FY2024-FY2025 TIMELINE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans JP", sans-serif;
+            background: #1a1614;
+            background-image: 
+                radial-gradient(at 20% 30%, rgba(191, 178, 144, 0.15) 0px, transparent 50%),
+                radial-gradient(at 80% 70%, rgba(191, 147, 91, 0.1) 0px, transparent 50%);
+            color: #e9e9e9;
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: rgba(35, 31, 32, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 32px 28px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid rgba(191, 147, 91, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #bfb290 0%, #bf935b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 12px;
+            font-size: 14px;
+            color: #bf935b;
+            text-decoration: none;
+            transition: all 0.3s;
+            opacity: 0.9;
+            font-weight: 600;
+        }
+        
+        .back-link:hover {
+            color: #bfb290;
+            opacity: 1;
+            transform: translateX(-4px);
+        }
+        
+        .timeline-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 32px 100px;
+        }
+        
+        .year-section {
+            margin-bottom: 100px;
+            position: relative;
+        }
+        
+        .year-title {
+            font-size: 72px;
+            font-weight: 900;
+            color: #bfb290;
+            margin-bottom: 60px;
+            padding-left: 60px;
+            position: relative;
+            line-height: 1.1;
+            letter-spacing: 4px;
+        }
+        
+        .year-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #bfb290 0%, #bf935b 100%);
+            border-radius: 50%;
+            box-shadow: 
+                0 0 30px rgba(191, 147, 91, 0.6),
+                0 0 60px rgba(191, 178, 144, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: translateY(-50%) scale(1); opacity: 1; }
+            50% { transform: translateY(-50%) scale(1.2); opacity: 0.8; }
+        }
+        
+        .year-title::after {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: calc(100% + 48px);
+            height: 100%;
+            background: linear-gradient(90deg, 
+                rgba(191, 147, 91, 0.05) 0%, 
+                transparent 50%, 
+                rgba(191, 178, 144, 0.05) 100%);
+            border-radius: 12px;
+            z-index: -1;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 48px;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .year-section .timeline-item:nth-child(2) { animation-delay: 0.1s; }
+        .year-section .timeline-item:nth-child(3) { animation-delay: 0.15s; }
+        .year-section .timeline-item:nth-child(4) { animation-delay: 0.2s; }
+        .year-section .timeline-item:nth-child(5) { animation-delay: 0.25s; }
+        .year-section .timeline-item:nth-child(6) { animation-delay: 0.3s; }
+        .year-section .timeline-item:nth-child(7) { animation-delay: 0.35s; }
+        .year-section .timeline-item:nth-child(8) { animation-delay: 0.4s; }
+        .year-section .timeline-item:nth-child(9) { animation-delay: 0.45s; }
+        .year-section .timeline-item:nth-child(10) { animation-delay: 0.5s; }
+        .year-section .timeline-item:nth-child(n+11) { animation-delay: 0.55s; }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 18px;
+            top: 0;
+            bottom: -40px;
+            width: 3px;
+            background: linear-gradient(
+                to bottom,
+                rgba(191, 178, 144, 0.4),
+                rgba(191, 147, 91, 0.2)
+            );
+        }
+        
+        .timeline-item:last-child::before {
+            display: none;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 8px;
+            top: 14px;
+            width: 22px;
+            height: 22px;
+            background: linear-gradient(135deg, #bfb290 0%, #bf935b 100%);
+            border: 4px solid #1a1614;
+            border-radius: 50%;
+            z-index: 2;
+            box-shadow: 0 0 20px rgba(191, 147, 91, 0.6);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .timeline-dot::before {
+            content: attr(data-month);
+            position: absolute;
+            left: 50%;
+            top: -40px;
+            transform: translateX(-50%) translateY(10px);
+            background: linear-gradient(135deg, #bf935b 0%, #bfb290 100%);
+            color: #1a1614;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(191, 147, 91, 0.5);
+        }
+        
+        .timeline-dot::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: -12px;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid #bf935b;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .timeline-item:hover .timeline-dot::before,
+        .timeline-dot:hover::before {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        .timeline-item:hover .timeline-dot::after,
+        .timeline-dot:hover::after {
+            opacity: 1;
+        }
+        
+        .timeline-card {
+            background: rgba(35, 31, 32, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 28px 32px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(191, 178, 144, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(191, 147, 91, 0.2);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .timeline-card[data-image]::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 180px;
+            height: 100%;
+            background-image: var(--bg-image);
+            background-size: cover;
+            background-position: center;
+            opacity: 0.12;
+            pointer-events: none;
+            filter: blur(2px);
+            transition: opacity 0.4s ease;
+        }
+        
+        .timeline-card[data-image]:hover::after {
+            opacity: 0.22;
+        }
+        
+        .image-icon {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, rgba(191, 147, 91, 0.3), rgba(191, 178, 144, 0.3));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            z-index: 5;
+        }
+        
+        .timeline-card:hover .image-icon {
+            background: linear-gradient(135deg, rgba(191, 147, 91, 0.5), rgba(191, 178, 144, 0.5));
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .timeline-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(191, 178, 144, 0.1) 0%, rgba(191, 147, 91, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .timeline-card:hover {
+            box-shadow: 
+                0 12px 48px rgba(191, 147, 91, 0.3),
+                inset 0 1px 0 rgba(191, 178, 144, 0.2);
+            transform: translateX(8px) translateY(-4px);
+            border-color: rgba(191, 147, 91, 0.5);
+        }
+        
+        .timeline-card:hover::before {
+            opacity: 1;
+        }
+        
+        .timeline-card:hover + .timeline-item .timeline-dot,
+        .timeline-item:hover .timeline-dot {
+            transform: scale(1.4);
+            box-shadow: 0 0 35px rgba(191, 178, 144, 0.9);
+        }
+        
+        .month {
+            font-size: 20px;
+            font-weight: 800;
+            color: #bf935b;
+            margin-bottom: 16px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+            display: inline-block;
+            padding: 6px 16px;
+            border-left: 5px solid #bf935b;
+            background: rgba(191, 147, 91, 0.12);
+            border-radius: 4px;
+        }
+        
+        .event-title {
+            font-size: 19px;
+            font-weight: 600;
+            color: #e9e9e9;
+            margin-bottom: 14px;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .event-category {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #bfb290;
+            background: rgba(191, 178, 144, 0.15);
+            padding: 7px 16px;
+            border-radius: 20px;
+            margin-top: 10px;
+            border: 1px solid rgba(191, 178, 144, 0.3);
+            letter-spacing: 0.8px;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s;
+        }
+        
+        .timeline-card:hover .event-category {
+            background: rgba(191, 178, 144, 0.25);
+            border-color: rgba(191, 178, 144, 0.6);
+            color: #bf935b;
+        }
+        
+        /* スマホ最適化 */
+        @media (max-width: 640px) {
+            body {
+                background-attachment: fixed;
+            }
+            
+            .header {
+                padding: 24px 20px;
+            }
+            
+            .header h1 {
+                font-size: 22px;
+                letter-spacing: 2px;
+            }
+            
+            .timeline-container {
+                padding: 40px 20px 60px;
+            }
+            
+            .year-title {
+                font-size: 52px;
+                margin-bottom: 44px;
+                padding-left: 48px;
+            }
+            
+            .year-title::before {
+                width: 24px;
+                height: 24px;
+            }
+            
+            .timeline-item {
+                margin-bottom: 36px;
+                padding-left: 40px;
+            }
+            
+            .timeline-dot {
+                left: 6px;
+                width: 18px;
+                height: 18px;
+            }
+            
+            .timeline-item::before {
+                left: 14px;
+            }
+            
+            .timeline-card {
+                padding: 22px 26px;
+                border-radius: 14px;
+            }
+            
+            .timeline-card:hover {
+                transform: translateX(4px) translateY(-2px);
+            }
+            
+            .event-title {
+                font-size: 17px;
+            }
+            
+            .month {
+                font-size: 17px;
+            }
+        }
+        
+        /* さらに小さい画面 */
+        @media (max-width: 380px) {
+            .header {
+                padding: 20px 16px;
+            }
+            
+            .timeline-container {
+                padding: 32px 16px 48px;
+            }
+            
+            .timeline-item {
+                padding-left: 36px;
+            }
+            
+            .timeline-card {
+                padding: 20px 22px;
+            }
+            
+            .year-title {
+                font-size: 44px;
+            }
+        }
+        
+        /* モーダル */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 85%;
+            position: relative;
+            animation: modalZoom 0.3s ease-out;
+        }
+        
+        @keyframes modalZoom {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .modal-image {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            border: 2px solid rgba(191, 147, 91, 0.4);
+            background: white;
+            padding: 12px;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: linear-gradient(135deg, #bf935b, #bfb290);
+            color: #1a1614;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(191, 147, 91, 0.5);
+        }
+        
+        .modal-close:hover {
+            transform: rotate(90deg) scale(1.1);
+            box-shadow: 0 6px 20px rgba(191, 147, 91, 0.7);
+        }
+        
+        .modal-caption {
+            position: absolute;
+            bottom: -60px;
+            left: 0;
+            right: 0;
+            color: #bfb290;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px;
+        }
+        
+        @media (max-width: 640px) {
+            .modal-content {
+                max-width: 95%;
+            }
+            
+            .modal-close {
+                top: -45px;
+                width: 36px;
+                height: 36px;
+                font-size: 20px;
+            }
+            
+            .modal-caption {
+                font-size: 12px;
+                bottom: -50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>FY2024-FY2025 TIMELINE</h1>
+        <a href="index.html" class="back-link">← トップページに戻る</a>
+    </div>
+    
+    <div class="timeline-container">
+        <!-- 2024年 -->
+        <div class="year-section">
+            <h2 class="year-title">2024</h2>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="JAN"></div>
+                <div class="timeline-card" data-image="img/全社_おまかせ申告65リリース.png" style="--bg-image: url('img/全社_おまかせ申告65リリース.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.01</div>
+                    <div class="event-title">個人事業主向け確定申告サービス<br>「おまかせ申告65」リリース</div>
+                    <div class="event-category">全社</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="FEB"></div>
+                <div class="timeline-card" data-image="img/営業開発_Amazon公式パートナー.png" style="--bg-image: url('img/営業開発_Amazon公式パートナー.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.02</div>
+                    <div class="event-title">amazon公式パートナーとして事業運営開始</div>
+                    <div class="event-category">営業開発</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="APR"></div>
+                <div class="timeline-card" data-image="img/管理本部_福利厚生サービス「カンリー」導入.png" style="--bg-image: url('img/管理本部_福利厚生サービス「カンリー」導入.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.04</div>
+                    <div class="event-title">福利厚生サービス「カンリー」導入</div>
+                    <div class="event-category">管理本部</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="APR"></div>
+                <div class="timeline-card" data-image="img/パートナーサクセス部_LINEを活用したPT開発開始.png" style="--bg-image: url('img/パートナーサクセス部_LINEを活用したPT開発開始.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.04</div>
+                    <div class="event-title">LINEを活用したPT開発 開始</div>
+                    <div class="event-category">パートナーサクセス部</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="JUN"></div>
+                <div class="timeline-card" data-image="img/ジックスタッフ_社名変更.png" style="--bg-image: url('img/ジックスタッフ_社名変更.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.06</div>
+                    <div class="event-title">グループ連携強化を目的として<br>「Q&Q」から「ジックスタッフ」へ社名変更</div>
+                    <div class="event-category">派遣事業</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="JUL"></div>
+                <div class="timeline-card" data-image="img/都市物流_デリカ定温TC解説（清澄デポ）.png" style="--bg-image: url('img/都市物流_デリカ定温TC解説（清澄デポ）.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.07</div>
+                    <div class="event-title">事業拡大に向けたデリカ定温TC 開設（清澄デポ）</div>
+                    <div class="event-category">都市物流</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="AUG"></div>
+                <div class="timeline-card" data-image="img/営業開発_大阪南港物流センター開設.png" style="--bg-image: url('img/営業開発_大阪南港物流センター開設.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.08</div>
+                    <div class="event-title">大阪南港物流センター 開設</div>
+                    <div class="event-category">営業開発</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="SEP"></div>
+                <div class="timeline-card" data-image="img/営業開発_柏デポ開設.png" style="--bg-image: url('img/営業開発_柏デポ開設.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.09</div>
+                    <div class="event-title">柏デポ 開設</div>
+                    <div class="event-category">営業開発</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="OCT"></div>
+                <div class="timeline-card" data-image="img/営業開発_横浜物流センター.png" style="--bg-image: url('img/営業開発_横浜物流センター.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.10</div>
+                    <div class="event-title">横浜物流センター 開設</div>
+                    <div class="event-category">営業開発</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="OCT"></div>
+                <div class="timeline-card" data-image="img/営業開発_カウネット全40台にTMS導入.png" style="--bg-image: url('img/営業開発_カウネット全40台にTMS導入.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.10</div>
+                    <div class="event-title">カウネット全40台にTMS導入</div>
+                    <div class="event-category">営業開発</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="OCT"></div>
+                <div class="timeline-card" data-image="img/全社_豊田通商とのパートナーシップ締結.png" style="--bg-image: url('img/全社_豊田通商とのパートナーシップ締結.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.10</div>
+                    <div class="event-title">豊田通商との戦略的パートナーシップ締結</div>
+                    <div class="event-category">全社</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="NOV"></div>
+                <div class="timeline-card" data-image="img/ジックコネクト_前払いSYS2002連携機能追加.png" style="--bg-image: url('img/ジックコネクト_前払いSYS2002連携機能追加.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.11</div>
+                    <div class="event-title">ジックコネクトに前払いの<br>SYS2002連携機能を追加</div>
+                    <div class="event-category">全社</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="NOV"></div>
+                <div class="timeline-card" data-image="img/国際輸送_IATAへの加盟.png" style="--bg-image: url('img/国際輸送_IATAへの加盟.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.11</div>
+                    <div class="event-title">国際航空運送協会（IATA） 加盟</div>
+                    <div class="event-category">国際輸送</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="DEC"></div>
+                <div class="timeline-card" data-image="img/全社_日本橋オフィスへ移転.png" style="--bg-image: url('img/全社_日本橋オフィスへ移転.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.12</div>
+                    <div class="event-title">ジックリース／ジックスタッフ／<br>ロジクエスト財務経理<br>日本橋オフィスへ移転</div>
+                    <div class="event-category">全社</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 2025年 -->
+        <div class="year-section">
+            <h2 class="year-title">2025</h2>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="FEB"></div>
+                <div class="timeline-card" data-image="img/ジックリース_管理台数1000台突破.png" style="--bg-image: url('img/ジックリース_管理台数1000台突破.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.02</div>
+                    <div class="event-title">管理台数 1000台 突破</div>
+                    <div class="event-category">ジックリース</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="APR"></div>
+                <div class="timeline-card" data-image="img/ジックリース_Finnova運用開始.png" style="--bg-image: url('img/ジックリース_Finnova運用開始.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.04</div>
+                    <div class="event-title">ジックリース基幹システム<br>「Finnova」運用開始</div>
+                    <div class="event-category">ジックリース</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="MAY"></div>
+                <div class="timeline-card" data-image="img/パートナーサクセス部_応募者に対する時間外休日の反響自動対応開始.png" style="--bg-image: url('img/パートナーサクセス部_応募者に対する時間外休日の反響自動対応開始.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.05</div>
+                    <div class="event-title">PT応募者に対する<br>時間外・休日の反響自動対応 開始</div>
+                    <div class="event-category">パートナーサクセス部</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="MAY"></div>
+                <div class="timeline-card" data-image="img/営業開発_インハウス配送い本格参入.png" style="--bg-image: url('img/営業開発_インハウス配送い本格参入.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.05</div>
+                    <div class="event-title">ホームロジで付加価値輸送となる<br>「インハウス配送」に本格参入</div>
+                    <div class="event-category">都市物流</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="JUL"></div>
+                <div class="timeline-card" data-image="img/定期便・都市物流_セルフ運行管理提供開始.png" style="--bg-image: url('img/定期便・都市物流_セルフ運行管理提供開始.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.07</div>
+                    <div class="event-title">記録簿アプリ<br>「セルフ運行管理」提供開始</div>
+                    <div class="event-category">都市物流／定期便</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="JUL"></div>
+                <div class="timeline-card" data-image="img/都市物流_名古屋スポット開始.png" style="--bg-image: url('img/都市物流_名古屋スポット開始.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.07</div>
+                    <div class="event-title">名古屋スポット 開始</div>
+                    <div class="event-category">都市物流</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="AUG"></div>
+                <div class="timeline-card" data-image="img/都市物流_新幹線荷物輸送スタート.png" style="--bg-image: url('img/都市物流_新幹線荷物輸送スタート.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.08</div>
+                    <div class="event-title">JR西日本 新幹線荷物輸送 スタート</div>
+                    <div class="event-category">都市物流</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="AUG"></div>
+                <div class="timeline-card" data-image="img/国際輸送_りんくうロジスティクスセンター保税蔵置場許可取得.png" style="--bg-image: url('img/国際輸送_りんくうロジスティクスセンター保税蔵置場許可取得.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.08</div>
+                    <div class="event-title">りんくうロジスティクスセンター<br>保税蔵置場許可取得</div>
+                    <div class="event-category">国際輸送</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="SEP"></div>
+                <div class="timeline-card" data-image="img/国際輸送_りんくうロジスティクスセンター運営開始.png" style="--bg-image: url('img/国際輸送_りんくうロジスティクスセンター運営開始.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.09</div>
+                    <div class="event-title">りんくうロジスティクスセンター 運営開始</div>
+                    <div class="event-category">国際輸送</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="SEP"></div>
+                <div class="timeline-card" data-image="img/全社_Streamsへ掲載.png" style="--bg-image: url('img/全社_Streamsへ掲載.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.09</div>
+                    <div class="event-title">豊田通商が運営するオンラインプラットフォーム<br>「Streams」へ掲載</div>
+                    <div class="event-category">全社</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="OCT"></div>
+                <div class="timeline-card" data-image="img/営業開発_TMSに関連する特許登録.png" style="--bg-image: url('img/営業開発_TMSに関連する特許登録.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.10</div>
+                    <div class="event-title">TMSに関連する 特許登録</div>
+                    <div class="event-category">営業推進</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="OCT"></div>
+                <div class="timeline-card" data-image="img/定期便・都市物流_安全管理者講習機関への登録.png" style="--bg-image: url('img/定期便・都市物流_安全管理者講習機関への登録.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.10</div>
+                    <div class="event-title">法令改正対応・PT稼働継続を目的とした<br>「安全管理者講習機関」登録</div>
+                    <div class="event-category">全社</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="OCT"></div>
+                <div class="timeline-card" data-image="img/営業推進_商談時の音声自動テキスト化するトライアル開始.png" style="--bg-image: url('img/営業推進_商談時の音声自動テキスト化するトライアル開始.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.10</div>
+                    <div class="event-title">商談時音声の自動テキスト化トライアル 開始</div>
+                    <div class="event-category">営業推進</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="NOV"></div>
+                <div class="timeline-card" data-image="img/都市物流_GiqButlerリリース.png" style="--bg-image: url('img/都市物流_GiqButlerリリース.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.11</div>
+                    <div class="event-title">手荷物あずかりサービス<br>「GiqButler」リリース</div>
+                    <div class="event-category">都市物流</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- モーダル -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <img class="modal-image" id="modalImage" src="" alt="">
+            <div class="modal-caption" id="modalCaption"></div>
+        </div>
+    </div>
+    
+    <script>
+        // 画像モーダル機能
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.timeline-card[data-image]');
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+            
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const imagePath = this.getAttribute('data-image');
+                    const month = this.querySelector('.month').textContent;
+                    const title = this.querySelector('.event-title').textContent.replace(/\n/g, ' ');
+                    
+                    modalImage.src = imagePath;
+                    modalCaption.textContent = `${month} - ${title}`;
+                    modal.classList.add('active');
+                });
+            });
+            
+            // モーダルの背景クリックで閉じる
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // ESCキーで閉じる
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+            
+            // スワイプで閉じる（モバイル対応）
+            let touchStartY = 0;
+            let touchEndY = 0;
+            
+            modal.addEventListener('touchstart', function(e) {
+                touchStartY = e.changedTouches[0].screenY;
+            }, false);
+            
+            modal.addEventListener('touchend', function(e) {
+                touchEndY = e.changedTouches[0].screenY;
+                handleSwipe();
+            }, false);
+            
+            function handleSwipe() {
+                if (touchEndY - touchStartY > 100) {
+                    closeModal();
+                }
+            }
+        });
+        
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+        }
+    </script>
+</body>
+</html>
