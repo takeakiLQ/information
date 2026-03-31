@@ -84,7 +84,47 @@
             border-radius: 8px;
             border: 1px solid rgba(255, 235, 0, 0.08);
             box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+            cursor: zoom-in;
         }
+
+        /* ===== ライトボックス ===== */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            cursor: zoom-out;
+        }
+        .lightbox.open { display: flex; }
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 0 80px rgba(0,0,0,0.8);
+            cursor: default;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: rgba(255,235,0,0.15);
+            border: 1px solid rgba(255,235,0,0.4);
+            color: #FFEB00;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 18px;
+            line-height: 34px;
+            text-align: center;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .lightbox-close:hover { background: rgba(255,235,0,0.3); }
 
         /* ===== フッター ===== */
         .page-footer {
@@ -117,11 +157,35 @@
     </header>
 
     <main class="content">
-        <img class="timeline-img" src="timeline.png" alt="FY2024 2017-2023 タイムライン">
+        <img class="timeline-img" src="timeline.png" alt="FY2024 2017-2023 タイムライン" onclick="openLightbox(this.src, this.alt)">
     </main>
 
+    <!-- ライトボックス -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <div class="lightbox-close" onclick="closeLightbox()">&#10005;</div>
+        <img class="lightbox-img" id="lightboxImg" src="" alt="" onclick="event.stopPropagation()">
+    </div>
+
     <footer class="page-footer">
-        &copy; 2024 ZIC Group &nbsp;&mdash;&nbsp; Internal Use Only
+        &copy; 2024 GIQ Group &nbsp;&mdash;&nbsp; Internal Use Only
     </footer>
+
+    <script>
+        var lightbox = document.getElementById('lightbox');
+        var lightboxImg = document.getElementById('lightboxImg');
+        function openLightbox(src, alt) {
+            lightboxImg.src = src;
+            lightboxImg.alt = alt;
+            lightbox.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
 </body>
 </html>

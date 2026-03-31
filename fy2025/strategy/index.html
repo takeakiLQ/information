@@ -116,20 +116,20 @@
         .slides-frame {
             width: 100%;
             max-width: 960px;
-            border: 1px solid rgba(255, 235, 0, 0.12);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 16px 64px rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
         /* 各スライド */
         .slide-item {
             width: 100%;
             position: relative;
-        }
-
-        .slide-item + .slide-item {
-            border-top: 1px solid rgba(255, 235, 0, 0.08);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 235, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            cursor: zoom-in;
         }
 
         /* ページ番号バッジ */
@@ -154,6 +154,45 @@
             height: auto;
             display: block;
         }
+
+        /* ===== ライトボックス ===== */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            cursor: zoom-out;
+        }
+        .lightbox.open { display: flex; }
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 0 80px rgba(0,0,0,0.8);
+            cursor: default;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: rgba(255,235,0,0.15);
+            border: 1px solid rgba(255,235,0,0.4);
+            color: #FFEB00;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 18px;
+            line-height: 34px;
+            text-align: center;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .lightbox-close:hover { background: rgba(255,235,0,0.3); }
 
         /* ===== フローティング「先頭へ」ボタン ===== */
         .top-btn {
@@ -227,6 +266,12 @@
         <div class="slides-frame" id="slidesFrame"></div>
     </div>
 
+    <!-- ライトボックス -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <div class="lightbox-close" onclick="closeLightbox()">&#10005;</div>
+        <img class="lightbox-img" id="lightboxImg" src="" alt="" onclick="event.stopPropagation()">
+    </div>
+
     <!-- 先頭へ戻るボタン -->
     <button class="top-btn" id="topBtn" aria-label="先頭へ戻る" onclick="window.scrollTo({top:0,behavior:'smooth'})">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -239,8 +284,24 @@
         var frame  = document.getElementById('slidesFrame');
         var curEl  = document.getElementById('curPage');
         var topBtn = document.getElementById('topBtn');
+        var lightbox = document.getElementById('lightbox');
+        var lightboxImg = document.getElementById('lightboxImg');
 
         function pad(n) { return String(n).padStart(2, '0'); }
+
+        function openLightbox(src, alt) {
+            lightboxImg.src = src;
+            lightboxImg.alt = alt;
+            lightbox.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
 
         /* スライド要素を全件生成 */
         for (var i = 1; i <= TOTAL; i++) {
@@ -258,6 +319,9 @@
             img.alt = i + 'ページ目';
             img.loading = (i <= 3) ? 'eager' : 'lazy';
             img.decoding = 'async';
+            (function(src, alt) {
+                item.addEventListener('click', function() { openLightbox(src, alt); });
+            })(img.src, img.alt);
 
             item.appendChild(badge);
             item.appendChild(img);
