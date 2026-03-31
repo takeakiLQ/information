@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="main17" width="960" height="720">
+	<defs>
+		<clipPath id="clip1">
+			<path d="M0 540L0 0L0 0L720 0L720 0L720 540L720 540L0 540z" />
+		</clipPath>
+		<clipPath id="clip2">
+			<path d="M0 539.9999L720 539.9999L720 539.9999L720 -0.00012207031L720 -0.00012207031L0 -0.00012207031z" />
+		</clipPath>
+		<clipPath id="clip3">
+			<path d="M1.0729E-05 540L720 540L720 540L720 0L720 0L1.0729E-05 0z" />
+		</clipPath>
+		<clipPath id="clip4">
+			<path d="M0 539.9998L720 539.9998L720 539.9998L720 -0.00018310547L720 -0.00018310547L0 -0.00018310547z" />
+		</clipPath>
+		<clipPath id="clip5">
+			<path d="M1.0729E-05 540L720 540L720 540L720 0L720 0L1.0729E-05 0z" />
+		</clipPath>
+		<clipPath id="clip6">
+			<path d="M1.0729E-05 540L720 540L720 540L720 0L720 0L1.0729E-05 0z" />
+		</clipPath>
+		<clipPath id="clip7">
+			<path d="M1.0729E-05 540L720 540L720 540L720 0L720 0L1.0729E-05 0z" />
+		</clipPath>
+		<clipPath id="clip8">
+			<path d="M1.0729E-05 540L720 540L720 540L720 0L720 0L1.0729E-05 0z" />
+		</clipPath>
+		<clipPath id="clip9">
+			<path d="M1.0729E-05 540L720 540L720 540L720 0L720 0L1.0729E-05 0z" />
+		</clipPath>
+		<clipPath id="clip10">
+			<path d="M1.0729E-05 540L720 540L720 540L720 0L720 0L1.0729E-05 0z" />
+		</clipPath>
+	</defs>
+	<g transform="matrix(1.3333334 0 0 1.3333334 0 0)">
+		<g clip-path="url(#clip1)">
+			<g>
+				<g clip-path="url(#clip2)">
+					<path stroke="none" fill="#FFFFFF" fill-rule="evenodd" d="M0 6.1035E-05L720 6.1035E-05L720 6.1035E-05L720 540.00006L720 540.00006L0 540.00006z" transform="matrix(1 0 0 -1 0 540)"  />
+				</g>
+				<g clip-path="url(#clip3)">
+					<text style="fill:#000000;font-family:FF0;" font-size="10.98" fill-opacity="1" x="699.06,705.89996" y="534.38,534.38,534.38">17</text>
+				</g>
+				<g clip-path="url(#clip4)">
+					<path stroke="none" fill="#FFCF37" fill-rule="evenodd" d="M0 237.06L720.24 237.06L720.24 237.06L720.24 302.52L720.24 302.52L0 302.52z" transform="matrix(1 0 0 -1 0 540)"  />
+				</g>
+				<path stroke="none" fill="#252573" fill-rule="evenodd" d="M17.46 251.46L61.5 251.46L61.5 251.46L61.5 288.54L61.5 288.54L17.46 288.54z" transform="matrix(1 0 0 -1 0 540)"  />
+				<g clip-path="url(#clip5)">
+					<text style="fill:#FFFFFF;font-family:FF3;font-weight:bold;" font-size="10.98" fill-opacity="1" x="28.52,39.5" y="266.54,266.54,266.54">物流</text>
+				</g>
+				<g clip-path="url(#clip6)">
+					<text style="fill:#FFFFFF;font-family:FF3;font-weight:bold;" font-size="10.98" fill-opacity="1" x="28.52,39.5" y="279.74,279.74,279.74">本部</text>
+				</g>
+				<g clip-path="url(#clip7)">
+					<text style="fill:#000000;font-family:FF3;font-weight:bold;" font-size="16.02" fill-opacity="1" x="208.68,224.7,240.72,256.74,272.75998,288.77997,304.79996,320.81995,336.83994,352.85992,368.8799" y="266.08,266.08,266.08,266.08,266.08,266.08,266.08,266.08,266.08,266.08,266.08,266.08">マイスター代走によるホ</text>
+					<text style="fill:#000000;font-family:FF3;font-weight:bold;" font-size="16.02" fill-opacity="1" x="384.83594,400.85593,416.87592" y="266.08,266.08,266.08,266.08">スピタ</text>
+					<text style="fill:#000000;font-family:FF3;font-weight:bold;" font-size="16.02" fill-opacity="1" x="432.83185,448.85184,464.87183" y="266.08,266.08,266.08,266.08">リティ</text>
+					<text style="fill:#000000;font-family:FF3;font-weight:bold;" font-size="16.02" fill-opacity="1" x="480.82776,496.84775" y="266.08,266.08,266.08">強化</text>
+				</g>
+				<g clip-path="url(#clip8)">
+					<text style="fill:#000000;font-family:FF3;font-weight:bold;" font-size="16.04" fill-opacity="1" x="208.68" y="285.28,285.28">人</text>
+				</g>
+				<g clip-path="url(#clip9)">
+					<text style="fill:#000000;font-family:FF3;font-weight:bold;" font-size="16.04" fill-opacity="1" x="224.7" y="285.28,285.28">×</text>
+				</g>
+				<g clip-path="url(#clip10)">
+					<text style="fill:#000000;font-family:FF3;font-weight:bold;" font-size="16.04" fill-opacity="1" x="238.02,254.04001,270.06,286.08,302.09998,318.11996,334.13995,350.15994,366.17993,382.19992,398.2199,414.2399" y="285.28,285.28,285.28,285.28,285.28,285.28,285.28,285.28,285.28,285.28,285.28,285.28,285.28">デジタルによる営業力強化</text>
+				</g>
+			</g>
+		</g>
+		<g>
+			<text style="fill:#FF0000;font-family:Arial;" font-size="10" fill-opacity="1" x="20" y="20">Evaluation&#160;Warning&#160;:&#160;The&#160;document&#160;was&#160;created&#160;with&#160;Spire.PDF&#160;for&#160;Python.</text>
+		</g>
+	</g>
+</svg>

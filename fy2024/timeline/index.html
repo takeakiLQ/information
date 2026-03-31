@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FY2024 タイムライン</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans JP", sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== ヘッダー ===== */
+        .page-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 32px;
+            border-bottom: 1px solid rgba(255, 235, 0, 0.12);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(12px);
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+        }
+        .back-btn:hover { color: #FFEB00; }
+
+        .header-divider {
+            width: 1px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .page-tag {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #0a0a0a;
+            background: linear-gradient(135deg, #FFEB00, #FFD800);
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+
+        .page-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        /* ===== コンテンツ ===== */
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 48px 24px 64px;
+            gap: 16px;
+        }
+
+        .timeline-img {
+            width: 100%;
+            max-width: 1400px;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 235, 0, 0.08);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        /* ===== フッター ===== */
+        .page-footer {
+            padding: 18px 32px;
+            text-align: center;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.18);
+            letter-spacing: 1px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 600px) {
+            .page-header { padding: 16px 16px; }
+            .content { padding: 24px 12px 48px; }
+            .page-title { font-size: 13px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <a href="../../index.html" class="back-btn">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M10 7H4M4 7L8 3M4 7L8 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            ポータルへ戻る
+        </a>
+        <div class="header-divider"></div>
+        <span class="page-tag">FY2024</span>
+        <div class="page-title">タイムライン</div>
+    </header>
+
+    <main class="content">
+        <img class="timeline-img" src="timeline.png" alt="FY2024 2017-2023 タイムライン">
+    </main>
+
+    <footer class="page-footer">
+        &copy; 2024 ZIC Group &nbsp;&mdash;&nbsp; Internal Use Only
+    </footer>
+</body>
+</html>
