@@ -5,6 +5,252 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZIC Information Portal</title>
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans JP", sans-serif;
+            background: #0a0a0a;
+            background-image:
+                radial-gradient(circle at 15% 25%, rgba(255, 235, 0, 0.06) 0px, transparent 30%),
+                radial-gradient(circle at 85% 75%, rgba(255, 235, 0, 0.06) 0px, transparent 30%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== ヘッダー ===== */
+        .site-header {
+            padding: 48px 32px 36px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 235, 0, 0.1);
+        }
+        .site-title {
+            font-size: clamp(20px, 5vw, 38px);
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #FFEB00 0%, #FFD800 60%, #FFC700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .site-subtitle {
+            margin-top: 10px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.35);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* ===== メイン ===== */
+        .main {
+            flex: 1;
+            padding: 52px 24px 72px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 56px;
+        }
+
+        /* ===== 年度セクション ===== */
+        .fy-section {
+            width: 100%;
+            max-width: 860px;
+        }
+
+        .fy-label {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+        .fy-label-year {
+            font-size: clamp(28px, 6vw, 44px);
+            font-weight: 900;
+            background: linear-gradient(135deg, #FFEB00 0%, #FFD800 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+            line-height: 1;
+        }
+        .fy-label-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255, 235, 0, 0.3), transparent);
+        }
+
+        /* ===== カードグリッド ===== */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            display: block;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 235, 0, 0.13);
+            border-radius: 14px;
+            padding: 28px 26px;
+            transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+                        box-shadow 0.28s ease,
+                        border-color 0.28s ease,
+                        background 0.28s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 235, 0, 0.05) 0%, transparent 55%);
+            opacity: 0;
+            transition: opacity 0.28s ease;
+            border-radius: 14px;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 235, 0, 0.45);
+            box-shadow: 0 16px 48px rgba(255, 235, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.55);
+            background: rgba(255, 235, 0, 0.03);
+        }
+        .card:hover::before { opacity: 1; }
+
+        /* 準備中カード */
+        .card.coming {
+            cursor: default;
+            opacity: 0.45;
+            pointer-events: none;
+        }
+
+        .card-type {
+            display: inline-block;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #0a0a0a;
+            background: linear-gradient(135deg, #FFEB00, #FFD800);
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+        }
+        .card.coming .card-type {
+            background: rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .card-title {
+            font-size: clamp(16px, 2.5vw, 20px);
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.35;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+        .card-desc {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.45);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        .card-arrow {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #FFEB00;
+            letter-spacing: 0.5px;
+        }
+        .card-arrow svg { transition: transform 0.25s ease; }
+        .card:hover .card-arrow svg { transform: translateX(5px); }
+
+        /* ===== フッター ===== */
+        .site-footer {
+            padding: 18px 32px;
+            text-align: center;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.18);
+            letter-spacing: 1px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* ===== レスポンシブ ===== */
+        @media (max-width: 600px) {
+            .site-header { padding: 36px 20px 28px; }
+            .main { padding: 36px 16px 56px; gap: 44px; }
+            .card { padding: 22px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="site-title">Information Portal</div>
+        <div class="site-subtitle">ZIC Group &nbsp;|&nbsp; Internal Documents</div>
+    </header>
+
+    <main class="main">
+
+        <!-- ===== FY2025 ===== -->
+        <section class="fy-section">
+            <div class="fy-label">
+                <span class="fy-label-year">FY2025</span>
+                <div class="fy-label-line"></div>
+            </div>
+            <div class="cards">
+                <a href="fy2025/timeline/index.html" class="card">
+                    <span class="card-type">Timeline</span>
+                    <div class="card-title">FY2025<br>タイムライン</div>
+                    <div class="card-desc">FY2024〜FY2025における各部門の主要トピック・実績をまとめたタイムラインです。</div>
+                    <div class="card-arrow">
+                        閲覧する
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <path d="M2 7H12M12 7L8 3M12 7L8 11" stroke="#FFEB00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </a>
+                <div class="card coming">
+                    <span class="card-type">Strategy</span>
+                    <div class="card-title">FY2025<br>事業戦略</div>
+                    <div class="card-desc">準備中</div>
+                    <div class="card-arrow">近日公開</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FY2026 ===== -->
+        <section class="fy-section">
+            <div class="fy-label">
+                <span class="fy-label-year">FY2026</span>
+                <div class="fy-label-line"></div>
+            </div>
+            <div class="cards">
+                <a href="fy2026/index.html" class="card">
+                    <span class="card-type">Strategy</span>
+                    <div class="card-title">FY2026<br>事業戦略</div>
+                    <div class="card-desc">FY2026の全社・各部門事業戦略をスライド形式で閲覧できます。</div>
+                    <div class="card-arrow">
+                        閲覧する
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <path d="M2 7H12M12 7L8 3M12 7L8 11" stroke="#FFEB00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        &copy; 2026 ZIC Group &nbsp;&mdash;&nbsp; Internal Use Only
+    </footer>
+</body>
+</html>
+    <style>
         * {
             margin: 0;
             padding: 0;

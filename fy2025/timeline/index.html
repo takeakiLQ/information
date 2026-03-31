@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2024-2025 TIMELINE V2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans JP", sans-serif;
+            background: #0a0a0a;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 235, 0, 0.08) 0px, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 235, 0, 0.12) 0px, transparent 25%),
+                radial-gradient(circle at 50% 50%, rgba(255, 235, 0, 0.05) 0px, transparent 40%);
+            color: #ffffff;
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* パーティクルアニメーション背景 */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: radial-gradient(circle, rgba(255, 235, 0, 0.8), transparent);
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0) translateX(0) scale(1);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            50% {
+                transform: translateY(-100vh) translateX(50px) scale(1.5);
+            }
+        }
+        
+        .header {
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.95) 0%, rgba(40, 35, 30, 0.9) 100%);
+            backdrop-filter: blur(20px) saturate(180%);
+            padding: 40px 28px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.8),
+                0 0 100px rgba(191, 147, 91, 0.2),
+                inset 0 1px 0 rgba(191, 178, 144, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid transparent;
+            border-image: linear-gradient(90deg, transparent, #FFEB00, #FFD800, #FFEB00, transparent) 1;
+            animation: headerGlow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes headerGlow {
+            from { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 0 0 50px rgba(255, 235, 0, 0.2); }
+            to { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 0 0 80px rgba(255, 235, 0, 0.4); }
+        }
+        
+        .header h1 {
+            font-size: 34px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #FFEB00 0%, #FFD800 50%, #FFC700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-shadow: 0 0 30px rgba(255, 235, 0, 0.5);
+            animation: titleShine 2s ease-in-out infinite;
+            position: relative;
+        }
+        
+        @keyframes titleShine {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+        
+        .header h1::after {
+            content: 'V2';
+            position: absolute;
+            top: -8px;
+            right: -40px;
+            font-size: 16px;
+            background: linear-gradient(135deg, #FFEB00, #FFD800);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 800;
+            color: #0a0a0a;
+            box-shadow: 0 4px 15px rgba(255, 235, 0, 0.6);
+            animation: badge 1s ease-in-out infinite;
+        }
+        
+        @keyframes badge {
+            0%, 100% { transform: rotate(-5deg) scale(1); }
+            50% { transform: rotate(5deg) scale(1.1); }
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 16px;
+            font-size: 14px;
+            color: #FFEB00;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0.9;
+            font-weight: 700;
+            padding: 8px 20px;
+            border: 2px solid rgba(255, 235, 0, 0.3);
+            border-radius: 25px;
+            background: rgba(255, 235, 0, 0.05);
+        }
+        
+        .back-link:hover {
+            color: #0a0a0a;
+            background: linear-gradient(135deg, #FFEB00, #FFD800);
+            border-color: #FFEB00;
+            transform: translateX(-8px);
+            box-shadow: 0 6px 20px rgba(255, 235, 0, 0.5);
+        }
+        
+        .timeline-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 32px 120px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .year-section {
+            margin-bottom: 120px;
+            position: relative;
+        }
+        
+        .year-title {
+            font-size: 80px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #FFEB00 0%, #FFD800 50%, #FFC700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 80px;
+            padding-left: 80px;
+            position: relative;
+            line-height: 1;
+            letter-spacing: 6px;
+            text-shadow: 0 0 50px rgba(255, 235, 0, 0.5);
+            animation: yearPulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes yearPulse {
+            0%, 100% { 
+                opacity: 0.9; 
+                transform: scale(1);
+                filter: brightness(1) drop-shadow(0 0 20px rgba(255, 235, 0, 0.3));
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(1.02);
+                filter: brightness(1.2) drop-shadow(0 0 40px rgba(255, 235, 0, 0.6));
+            }
+        }
+        
+        .year-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #FFEB00 0%, #FFD800 100%);
+            border-radius: 50%;
+            box-shadow: 
+                0 0 40px rgba(255, 235, 0, 0.9),
+                0 0 80px rgba(255, 235, 0, 0.6),
+                inset 0 0 20px rgba(255, 255, 255, 0.3);
+            animation: yearDot 2s ease-in-out infinite;
+        }
+        
+        @keyframes yearDot {
+            0%, 100% { 
+                transform: translateY(-50%) scale(1) rotate(0deg);
+                box-shadow: 0 0 40px rgba(255, 235, 0, 0.9), 0 0 80px rgba(255, 235, 0, 0.6);
+            }
+            50% { 
+                transform: translateY(-50%) scale(1.15) rotate(180deg);
+                box-shadow: 0 0 60px rgba(255, 235, 0, 1), 0 0 120px rgba(255, 235, 0, 0.8);
+            }
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 70px;
+            margin-bottom: 50px;
+            animation: slideInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            opacity: 0;
+        }
+        
+        @keyframes slideInRight {
+            0% {
+                opacity: 0;
+                transform: translateX(-100px) translateY(50px) rotate(-5deg) scale(0.8);
+                filter: blur(10px);
+            }
+            60% {
+                opacity: 0.8;
+                transform: translateX(10px) translateY(-5px) rotate(1deg) scale(1.05);
+                filter: blur(2px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+                filter: blur(0);
+            }
+        }
+        
+        .year-section .timeline-item:nth-child(2) { animation-delay: 0.1s; }
+        .year-section .timeline-item:nth-child(3) { animation-delay: 0.15s; }
+        .year-section .timeline-item:nth-child(4) { animation-delay: 0.2s; }
+        .year-section .timeline-item:nth-child(5) { animation-delay: 0.25s; }
+        .year-section .timeline-item:nth-child(6) { animation-delay: 0.3s; }
+        .year-section .timeline-item:nth-child(7) { animation-delay: 0.35s; }
+        .year-section .timeline-item:nth-child(8) { animation-delay: 0.4s; }
+        .year-section .timeline-item:nth-child(9) { animation-delay: 0.45s; }
+        .year-section .timeline-item:nth-child(10) { animation-delay: 0.5s; }
+        .year-section .timeline-item:nth-child(n+11) { animation-delay: 0.6s; }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 28px;
+            top: 0;
+            bottom: -50px;
+            width: 4px;
+            background: linear-gradient(
+                to bottom,
+                rgba(255, 235, 0, 0.7),
+                rgba(255, 235, 0, 0.5),
+                rgba(255, 235, 0, 0.3)
+            );
+            box-shadow: 0 0 10px rgba(255, 235, 0, 0.5);
+        }
+        
+        /* 同じ月のイベントでも線を継続 */
+        .timeline-item:last-child::before {
+            display: none;
+        }
+        
+        /* 同じ月の2番目以降は左側の月表示を非表示 */
+        .timeline-item.same-month .timeline-dot::before,
+        .timeline-item.same-month .timeline-dot::after {
+            display: none !important;
+        }
+        
+        /* 同じ月の2番目以降はドットを小さく */
+        .timeline-item.same-month .timeline-dot {
+            width: 18px;
+            height: 18px;
+            left: 21px;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 16px;
+            top: 20px;
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #FFEB00 0%, #FFD800 100%);
+            border: 5px solid #0a0a0a;
+            border-radius: 50%;
+            z-index: 2;
+            box-shadow: 
+                0 0 25px rgba(255, 235, 0, 0.9),
+                0 0 50px rgba(255, 235, 0, 0.7),
+                inset 0 0 10px rgba(255, 255, 255, 0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            animation: dotPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes dotPulse {
+            0%, 100% { 
+                box-shadow: 0 0 25px rgba(255, 235, 0, 0.9), 0 0 50px rgba(255, 235, 0, 0.7);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(255, 235, 0, 1), 0 0 80px rgba(255, 235, 0, 0.9), 0 0 120px rgba(255, 235, 0, 0.5);
+                transform: scale(1.1);
+            }
+        }
+        
+        .timeline-dot::before {
+            content: attr(data-month);
+            position: absolute;
+            right: 50px;
+            top: 50%;
+            transform: translateY(-50%) translateX(-10px);
+            background: linear-gradient(135deg, #FFEB00 0%, #FFD800 100%);
+            color: #0a0a0a;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 900;
+            letter-spacing: 2.5px;
+            white-space: nowrap;
+            opacity: 1;
+            pointer-events: none;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(255, 235, 0, 0.7);
+            z-index: 10;
+        }
+        
+        .timeline-dot::after {
+            content: '';
+            position: absolute;
+            right: 42px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-left: 8px solid #FFEB00;
+            opacity: 1;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
+        }
+        
+        .timeline-item:hover .timeline-dot::before,
+        .timeline-dot:hover::before {
+            transform: translateY(-50%) translateX(-5px);
+            box-shadow: 0 6px 25px rgba(255, 235, 0, 0.9);
+        }
+        
+        .timeline-item:hover .timeline-dot::after,
+        .timeline-dot:hover::after {
+            right: 44px;
+        }
+        
+        .timeline-card {
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.9) 0%, rgba(50, 40, 35, 0.8) 100%);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-radius: 24px;
+            padding: 32px 36px;
+            box-shadow: 
+                0 12px 40px rgba(0, 0, 0, 0.7),
+                0 0 0 1px rgba(255, 235, 0, 0.2),
+                inset 0 1px 0 rgba(255, 235, 0, 0.15);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        /* 画像オーバーレイエフェクト */
+        .timeline-card[data-image]::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 100%;
+            background-image: var(--bg-image);
+            background-size: cover;
+            background-position: center;
+            opacity: 0.28;
+            pointer-events: none;
+            filter: blur(0.5px) brightness(1.4);
+            transition: all 0.5s ease;
+            mask-image: linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+            -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+            z-index: 0;
+        }
+        
+        .timeline-card[data-image]:hover::before {
+            opacity: 0.3;
+            transform: scale(1.1);
+            filter: blur(0px) brightness(1.4);
+        }
+        
+        /* グローイングボーダー */
+        .timeline-card::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #FFEB00, #FFD800, #FFC700, #FFEB00);
+            background-size: 400% 400%;
+            border-radius: 24px;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.5s ease;
+            animation: gradientShift 3s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .timeline-card:hover::after {
+            opacity: 1;
+        }
+        
+        .timeline-card:hover::before {
+            opacity: 0.45;
+            transform: scale(1.1);
+            filter: blur(0px) brightness(1.5);
+        }
+        
+        .timeline-card:hover::after {
+            opacity: 1;
+        }
+        
+        /* スクロール時の輝きエフェクト */
+        .shine-effect {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 235, 0, 0.3) 50%,
+                transparent
+            );
+            pointer-events: none;
+            z-index: 5;
+            transition: left 0.6s ease;
+        }
+        
+        .timeline-item.reveal .shine-effect {
+            left: 100%;
+        }
+        
+        .image-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, rgba(255, 235, 0, 0.4), rgba(255, 216, 0, 0.4));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(255, 235, 0, 0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: scale(0) rotate(-180deg);
+        }
+        
+        .timeline-item.reveal .image-icon {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s,
+                        background 0.4s ease,
+                        box-shadow 0.4s ease;
+        }
+        
+        .timeline-card:hover .image-icon {
+            background: linear-gradient(135deg, rgba(255, 235, 0, 0.7), rgba(255, 216, 0, 0.7));
+            transform: scale(1.2) rotate(360deg);
+            box-shadow: 0 6px 25px rgba(255, 235, 0, 0.9);
+        }
+        
+        .timeline-card:hover {
+            box-shadow: 
+                0 20px 60px rgba(255, 235, 0, 0.5),
+                0 0 100px rgba(255, 235, 0, 0.3),
+                inset 0 1px 0 rgba(255, 235, 0, 0.3);
+            transform: translateX(12px) translateY(-8px) scale(1.02);
+            border-color: rgba(255, 235, 0, 0.6);
+        }
+        
+        .timeline-card:hover + .timeline-item .timeline-dot,
+        .timeline-item:hover .timeline-dot {
+            transform: scale(1.5) rotate(180deg);
+            box-shadow: 
+                0 0 50px rgba(255, 235, 0, 1),
+                0 0 100px rgba(255, 235, 0, 0.8);
+        }
+        
+        .month {
+            font-size: 20px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #FFEB00 0%, #FFD800 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 10;
+            display: inline-block;
+            padding: 6px 16px;
+            border-left: 5px solid #FFEB00;
+            background-color: rgba(255, 235, 0, 0.1);
+            border-radius: 5px;
+            box-shadow: 0 3px 12px rgba(255, 235, 0, 0.4);
+            opacity: 0;
+            transform: translateX(-30px) scale(0.8);
+            filter: blur(5px);
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        /* スクロール時に月度が表示される */
+        .timeline-item.reveal .month {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+            filter: blur(0);
+            animation: monthReveal 1s cubic-bezier(0.34, 1.56, 0.64, 1), monthGlow 2s ease-in-out 0.5s infinite alternate;
+        }
+        
+        /* モダンな登場アニメーション */
+        @keyframes monthReveal {
+            0% {
+                opacity: 0;
+                transform: translateX(-30px) scale(0.8) rotateY(-20deg);
+                filter: blur(5px);
+            }
+            50% {
+                opacity: 0.5;
+                transform: translateX(5px) scale(1.05) rotateY(5deg);
+                filter: blur(2px);
+            }
+            70% {
+                opacity: 0.8;
+                transform: translateX(-2px) scale(0.98) rotateY(-2deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0) scale(1) rotateY(0deg);
+                filter: blur(0);
+            }
+        }
+        
+        @keyframes monthGlow {
+            from { 
+                box-shadow: 0 4px 15px rgba(255, 235, 0, 0.4);
+                text-shadow: 0 0 10px rgba(255, 235, 0, 0.3);
+            }
+            to { 
+                box-shadow: 0 6px 20px rgba(255, 235, 0, 0.7), 0 0 30px rgba(255, 235, 0, 0.3);
+                text-shadow: 0 0 20px rgba(255, 235, 0, 0.6);
+            }
+        }
+        
+        /* グリッチエフェクト（最新技術） */
+        .timeline-item.reveal .month::before,
+        .timeline-item.reveal .month::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #FFEB00 0%, #FFD800 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            z-index: -1;
+        }
+        
+        .timeline-item.reveal .month::before {
+            animation: glitch1 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s 2;
+            clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+        }
+        
+        .timeline-item.reveal .month::after {
+            animation: glitch2 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s 2;
+            clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+        }
+        
+        @keyframes glitch1 {
+            0%, 100% { 
+                transform: translateX(0);
+                opacity: 0;
+            }
+            50% { 
+                transform: translateX(-3px);
+                opacity: 0.8;
+                filter: hue-rotate(90deg);
+            }
+        }
+        
+        @keyframes glitch2 {
+            0%, 100% { 
+                transform: translateX(0);
+                opacity: 0;
+            }
+            50% { 
+                transform: translateX(3px);
+                opacity: 0.8;
+                filter: hue-rotate(-90deg);
+            }
+        }
+        
+        .event-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 14px;
+            line-height: 1.6;
+            position: relative;
+            z-index: 10;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s;
+        }
+        
+        .timeline-item.reveal .event-title {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .event-category {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            color: #0a0a0a;
+            background: linear-gradient(135deg, #FFEB00 0%, #FFD800 100%);
+            padding: 8px 20px;
+            border-radius: 20px;
+            margin-top: 10px;
+            border: 2px solid rgba(255, 235, 0, 0.5);
+            letter-spacing: 1.2px;
+            position: relative;
+            z-index: 10;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(255, 235, 0, 0.4);
+            opacity: 0;
+            transform: scale(0.5) rotateX(-90deg);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .timeline-item.reveal .event-category {
+            opacity: 1;
+            transform: scale(1) rotateX(0deg);
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s, 
+                        background 0.4s ease,
+                        border-color 0.4s ease,
+                        box-shadow 0.4s ease,
+                        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .timeline-card:hover .event-category {
+            background: linear-gradient(135deg, #FFD800 0%, #FFEB00 100%);
+            border-color: #FFEB00;
+            transform: translateY(-4px) scale(1) rotateX(0deg);
+            box-shadow: 0 8px 25px rgba(255, 235, 0, 0.8);
+        }
+        
+        /* スマホ最適化 */
+        @media (max-width: 640px) {
+            .header {
+                padding: 28px 24px;
+            }
+            
+            .header h1 {
+                font-size: 26px;
+                letter-spacing: 3px;
+            }
+            
+            .header h1::after {
+                top: -6px;
+                right: -35px;
+                font-size: 14px;
+                padding: 3px 10px;
+            }
+            
+            .timeline-container {
+                padding: 60px 24px 80px;
+            }
+            
+            .year-title {
+                font-size: 60px;
+                margin-bottom: 60px;
+                padding-left: 70px;
+            }
+            
+            .year-title::before {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .timeline-item {
+                margin-bottom: 45px;
+                padding-left: 55px;
+            }
+            
+            .timeline-dot {
+                left: 12px;
+                width: 24px;
+                height: 24px;
+            }
+            
+            .timeline-item::before {
+                left: 23px;
+                width: 3px;
+            }
+            
+            .timeline-card {
+                padding: 26px 28px;
+                border-radius: 20px;
+            }
+            
+            .timeline-card:hover {
+                transform: translateX(8px) translateY(-4px) scale(1.01);
+            }
+            
+            .event-title {
+                font-size: 17px;
+            }
+            
+            .month {
+                font-size: 18px;
+            }
+            
+            .event-category {
+                font-size: 11px;
+            }
+            
+            .image-icon {
+                width: 42px;
+                height: 42px;
+                font-size: 20px;
+            }
+        }
+        
+        /* さらに小さい画面 */
+        @media (max-width: 380px) {
+            .header {
+                padding: 24px 20px;
+            }
+            
+            .header h1 {
+                font-size: 22px;
+            }
+            
+            .timeline-container {
+                padding: 48px 20px 60px;
+            }
+            
+            .timeline-item {
+                padding-left: 50px;
+            }
+            
+            .timeline-card {
+                padding: 24px 26px;
+            }
+            
+            .year-title {
+                font-size: 50px;
+            }
+        }
+        
+        /* モーダル */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.97);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            backdrop-filter: blur(20px);
+        }
+        
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            max-width: 92%;
+            max-height: 88%;
+            position: relative;
+            animation: modalBounceIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        
+        @keyframes modalBounceIn {
+            0% {
+                transform: scale(0.3) translateY(-100px) rotateX(90deg);
+                opacity: 0;
+                filter: blur(10px);
+            }
+            60% {
+                transform: scale(1.05) translateY(10px) rotateX(-5deg);
+            }
+            80% {
+                transform: scale(0.98) translateY(-5px) rotateX(3deg);
+            }
+            100% {
+                transform: scale(1) translateY(0) rotateX(0deg);
+                opacity: 1;
+                filter: blur(0);
+            }
+        }
+        
+        .modal-image {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 20px;
+            box-shadow: 
+                0 30px 90px rgba(0, 0, 0, 0.9),
+                0 0 100px rgba(255, 235, 0, 0.5);
+            border: 3px solid rgba(255, 235, 0, 0.7);
+            background: white;
+            padding: 16px;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: -60px;
+            right: 0;
+            background: linear-gradient(135deg, #FFEB00, #FFD800);
+            color: #0a0a0a;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 28px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 900;
+            box-shadow: 0 6px 20px rgba(255, 235, 0, 0.7);
+        }
+        
+        .modal-close:hover {
+            transform: rotate(180deg) scale(1.2);
+            box-shadow: 0 10px 30px rgba(255, 235, 0, 0.9);
+            background: linear-gradient(135deg, #FFD800, #FFEB00);
+        }
+        
+        .modal-caption {
+            position: absolute;
+            bottom: -70px;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #FFEB00, #FFD800);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 700;
+            padding: 10px;
+            text-shadow: 0 2px 10px rgba(255, 235, 0, 0.5);
+        }
+        
+        @media (max-width: 640px) {
+            .modal-content {
+                max-width: 96%;
+            }
+            
+            .modal-close {
+                top: -55px;
+                width: 44px;
+                height: 44px;
+                font-size: 24px;
+            }
+            
+            .modal-caption {
+                font-size: 13px;
+                bottom: -60px;
+            }
+        }
+        
+        /* スクロールバーカスタマイズ */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #FFEB00, #FFD800);
+            border-radius: 6px;
+            border: 2px solid #0a0a0a;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #FFD800, #FFEB00);
+        }
+        
+        /* モーダルが開いている時は背景のアニメーションを停止 */
+        body.modal-open .particle,
+        body.modal-open .header h1::before,
+        body.modal-open .header h1::after,
+        body.modal-open .year-title::before,
+        body.modal-open .timeline-dot,
+        body.modal-open .month,
+        body.modal-open .timeline-card::after {
+            animation-play-state: paused !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- パーティクル背景 -->
+    <div class="particles" id="particles"></div>
+    
+    <div class="header">
+        <h1>2024-2025 TIMELINE</h1>
+        <a href="../../index.html" class="back-link">← トップページに戻る</a>
+    </div>
+    
+    <div class="timeline-container">
+        <!-- 2024年 -->
+        <div class="year-section">
+            <h2 class="year-title">2024</h2>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="JAN"></div>
+                <div class="timeline-card" data-image="img/全社_おまかせ申告65リリース.png" style="--bg-image: url('img/全社_おまかせ申告65リリース.png')">
+                    <div class="shine-effect"></div>
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.01</div>
+                    <div class="event-title">個人事業主向け確定申告サービス<br>「おまかせ申告65」リリース</div>
+                    <div class="event-category">全社</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="FEB"></div>
+                <div class="timeline-card" data-image="img/営業開発_Amazon公式パートナー.png" style="--bg-image: url('img/営業開発_Amazon公式パートナー.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.02</div>
+                    <div class="event-title">amazon公式パートナーとして事業運営開始</div>
+                    <div class="event-category">営業開発</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="APR"></div>
+                <div class="timeline-card" data-image="img/管理本部_福利厚生サービス「カンリー」導入.png" style="--bg-image: url('img/管理本部_福利厚生サービス「カンリー」導入.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.04</div>
+                    <div class="event-title">福利厚生サービス「カンリー」導入</div>
+                    <div class="event-category">管理本部</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="APR"></div>
+                <div class="timeline-card" data-image="img/パートナーサクセス部_LINEを活用したPT開発開始.png" style="--bg-image: url('img/パートナーサクセス部_LINEを活用したPT開発開始.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.04</div>
+                    <div class="event-title">LINEを活用したPT開発 開始</div>
+                    <div class="event-category">パートナーサクセス部</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="JUN"></div>
+                <div class="timeline-card" data-image="img/ジックスタッフ_社名変更.png" style="--bg-image: url('img/ジックスタッフ_社名変更.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.06</div>
+                    <div class="event-title">グループ連携強化を目的として<br>「Q&Q」から「ジックスタッフ」へ社名変更</div>
+                    <div class="event-category">ジックスタッフ</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="JUL"></div>
+                <div class="timeline-card" data-image="img/都市物流_デリカ定温TC解説（清澄デポ）.png" style="--bg-image: url('img/都市物流_デリカ定温TC解説（清澄デポ）.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.07</div>
+                    <div class="event-title">事業拡大に向けたデリカ定温TC 開設（清澄デポ）</div>
+                    <div class="event-category">都市物流</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="AUG"></div>
+                <div class="timeline-card" data-image="img/営業開発_大阪南港物流センター開設.png" style="--bg-image: url('img/営業開発_大阪南港物流センター開設.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.08</div>
+                    <div class="event-title">大阪南港物流センター 開設</div>
+                    <div class="event-category">営業開発</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="SEP"></div>
+                <div class="timeline-card" data-image="img/営業開発_柏デポ開設.png" style="--bg-image: url('img/営業開発_柏デポ開設.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.09</div>
+                    <div class="event-title">柏デポ 開設</div>
+                    <div class="event-category">営業開発</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="OCT"></div>
+                <div class="timeline-card" data-image="img/営業開発_横浜物流センター.png" style="--bg-image: url('img/営業開発_横浜物流センター.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.10</div>
+                    <div class="event-title">横浜物流センター 開設</div>
+                    <div class="event-category">営業開発</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="OCT"></div>
+                <div class="timeline-card" data-image="img/営業開発_カウネット全40台にTMS導入.png" style="--bg-image: url('img/営業開発_カウネット全40台にTMS導入.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.10</div>
+                    <div class="event-title">カウネット全40台にTMS導入</div>
+                    <div class="event-category">営業開発</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="OCT"></div>
+                <div class="timeline-card" data-image="img/全社_豊田通商とのパートナーシップ締結.png" style="--bg-image: url('img/全社_豊田通商とのパートナーシップ締結.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.10</div>
+                    <div class="event-title">豊田通商との戦略的パートナーシップ締結</div>
+                    <div class="event-category">全社</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="NOV"></div>
+                <div class="timeline-card" data-image="img/ジックコネクト_前払いSYS2002連携機能追加.png" style="--bg-image: url('img/ジックコネクト_前払いSYS2002連携機能追加.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.11</div>
+                    <div class="event-title">ジックコネクトに前払いの<br>SYS2002連携機能を追加</div>
+                    <div class="event-category">全社</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="NOV"></div>
+                <div class="timeline-card" data-image="img/国際輸送_IATAへの加盟.png" style="--bg-image: url('img/国際輸送_IATAへの加盟.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.11</div>
+                    <div class="event-title">国際航空運送協会（IATA） 加盟</div>
+                    <div class="event-category">国際輸送</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="DEC"></div>
+                <div class="timeline-card" data-image="img/全社_日本橋オフィスへ移転.png" style="--bg-image: url('img/全社_日本橋オフィスへ移転.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2024.12</div>
+                    <div class="event-title">ジックリース／ジックスタッフ／<br>ロジクエスト財務経理<br>日本橋オフィスへ移転</div>
+                    <div class="event-category">全社</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 2025年 -->
+        <div class="year-section">
+            <h2 class="year-title">2025</h2>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="FEB"></div>
+                <div class="timeline-card" data-image="img/ジックリース_管理台数1000台突破.png" style="--bg-image: url('img/ジックリース_管理台数1000台突破.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.02</div>
+                    <div class="event-title">管理台数 1000台 突破</div>
+                    <div class="event-category">ジックリース</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="APR"></div>
+                <div class="timeline-card" data-image="img/ジックリース_Finnova運用開始.png" style="--bg-image: url('img/ジックリース_Finnova運用開始.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.04</div>
+                    <div class="event-title">ジックリース基幹システム<br>「Finnova」運用開始</div>
+                    <div class="event-category">ジックリース</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="MAY"></div>
+                <div class="timeline-card" data-image="img/パートナーサクセス部_応募者に対する時間外休日の反響自動対応開始.png" style="--bg-image: url('img/パートナーサクセス部_応募者に対する時間外休日の反響自動対応開始.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.05</div>
+                    <div class="event-title">PT応募者に対する<br>時間外・休日の反響自動対応 開始</div>
+                    <div class="event-category">パートナーサクセス部</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="MAY"></div>
+                <div class="timeline-card" data-image="img/営業開発_インハウス配送い本格参入.png" style="--bg-image: url('img/営業開発_インハウス配送い本格参入.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.05</div>
+                    <div class="event-title">ホームロジで付加価値輸送となる<br>「インハウス配送」に本格参入</div>
+                    <div class="event-category">営業開発</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="JUL"></div>
+                <div class="timeline-card" data-image="img/定期便・都市物流_セルフ運行管理提供開始.png" style="--bg-image: url('img/定期便・都市物流_セルフ運行管理提供開始.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.07</div>
+                    <div class="event-title">記録簿アプリ<br>「セルフ運行管理」提供開始</div>
+                    <div class="event-category">都市物流／定期便</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="JUL"></div>
+                <div class="timeline-card" data-image="img/都市物流_名古屋スポット開始.png" style="--bg-image: url('img/都市物流_名古屋スポット開始.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.07</div>
+                    <div class="event-title">名古屋スポット 開始</div>
+                    <div class="event-category">都市物流</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="AUG"></div>
+                <div class="timeline-card" data-image="img/都市物流_新幹線荷物輸送スタート.png" style="--bg-image: url('img/都市物流_新幹線荷物輸送スタート.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.08</div>
+                    <div class="event-title">JR西日本 新幹線荷物輸送 スタート</div>
+                    <div class="event-category">都市物流</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="AUG"></div>
+                <div class="timeline-card" data-image="img/国際輸送_りんくうロジスティクスセンター保税蔵置場許可取得.png" style="--bg-image: url('img/国際輸送_りんくうロジスティクスセンター保税蔵置場許可取得.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.08</div>
+                    <div class="event-title">りんくうロジスティクスセンター<br>保税蔵置場許可取得</div>
+                    <div class="event-category">国際輸送</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="SEP"></div>
+                <div class="timeline-card" data-image="img/国際輸送_りんくうロジスティクスセンター運営開始.png" style="--bg-image: url('img/国際輸送_りんくうロジスティクスセンター運営開始.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.09</div>
+                    <div class="event-title">りんくうロジスティクスセンター 運営開始</div>
+                    <div class="event-category">国際輸送</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="SEP"></div>
+                <div class="timeline-card" data-image="img/全社_Streamsへ掲載.png" style="--bg-image: url('img/全社_Streamsへ掲載.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.09</div>
+                    <div class="event-title">豊田通商が運営するオンラインプラットフォーム<br>「Streams」へ掲載</div>
+                    <div class="event-category">全社</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="OCT"></div>
+                <div class="timeline-card" data-image="img/営業開発_TMSに関連する特許登録.png" style="--bg-image: url('img/営業開発_TMSに関連する特許登録.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.10</div>
+                    <div class="event-title">TMSに関連する 特許登録</div>
+                    <div class="event-category">営楫開発</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="OCT"></div>
+                <div class="timeline-card" data-image="img/定期便・都市物流_安全管理者講習機関への登録.png" style="--bg-image: url('img/定期便・都市物流_安全管理者講習機関への登録.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.10</div>
+                    <div class="event-title">法令改正対応・PT稼働継続を目的とした<br>「安全管理者講習機関」登録</div>
+                    <div class="event-category">定期便/都市物流</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="OCT"></div>
+                <div class="timeline-card" data-image="img/営業推進_商談時の音声自動テキスト化するトライアル開始.png" style="--bg-image: url('img/営業推進_商談時の音声自動テキスト化するトライアル開始.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.10</div>
+                    <div class="event-title">商談時音声の自動テキスト化トライアル 開始</div>
+                    <div class="event-category">営業推進</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" data-month="NOV"></div>
+                <div class="timeline-card" data-image="img/都市物流_GiqButlerリリース.png" style="--bg-image: url('img/都市物流_GiqButlerリリース.png')">
+                    <span class="image-icon">📷</span>
+                    <div class="month">2025.11</div>
+                    <div class="event-title">手荷物あずかりサービス<br>「GiqButler」リリース</div>
+                    <div class="event-category">都市物流</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- モーダル -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <img class="modal-image" id="modalImage" src="" alt="">
+            <div class="modal-caption" id="modalCaption"></div>
+        </div>
+    </div>
+    
+    <script>
+        // パーティクルアニメーション生成
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // 画像モーダル機能
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            
+            // 月度要素にdata-text属性を追加（グリッチエフェクト用）
+            const months = document.querySelectorAll('.month');
+            months.forEach(month => {
+                month.setAttribute('data-text', month.textContent);
+            });
+            
+            // すべてのタイムラインアイテムを取得
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            
+            // 同じ月度のイベントを検出して処理
+            let previousMonth = null;
+            
+            timelineItems.forEach((item, index) => {
+                const monthElement = item.querySelector('.month');
+                if (monthElement) {
+                    const currentMonth = monthElement.textContent.trim();
+                    
+                    // 前のアイテムと同じ月かチェック
+                    if (currentMonth === previousMonth) {
+                        item.classList.add('same-month');
+                    }
+                    
+                    previousMonth = currentMonth;
+                }
+            });
+            
+            const cards = document.querySelectorAll('.timeline-card[data-image]');
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+            
+            // スクロールアニメーション検出
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('reveal');
+                        // 一度表示されたら監視を解除
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            // すべてのタイムラインアイテムを監視
+            timelineItems.forEach((item, index) => {
+                // 画面ロード時に上部3つは即座に表示
+                if (index < 3) {
+                    item.classList.add('reveal');
+                } else {
+                    observer.observe(item);
+                }
+            });
+            
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const imagePath = this.getAttribute('data-image');
+                    const month = this.querySelector('.month').textContent;
+                    const title = this.querySelector('.event-title').textContent.replace(/\n/g, ' ');
+                    
+                    modalImage.src = imagePath;
+                    modalCaption.textContent = `${month} - ${title}`;
+                    modal.classList.add('active');
+                    document.body.classList.add('modal-open');
+                });
+            });
+            
+            // モーダルの背景クリックで閉じる
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // ESCキーで閉じる
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+            
+            // スワイプで閉じる（モバイル対応）
+            let touchStartY = 0;
+            let touchEndY = 0;
+            
+            modal.addEventListener('touchstart', function(e) {
+                touchStartY = e.changedTouches[0].screenY;
+            }, false);
+            
+            modal.addEventListener('touchend', function(e) {
+                touchEndY = e.changedTouches[0].screenY;
+                handleSwipe();
+            }, false);
+            
+            function handleSwipe() {
+                if (touchEndY - touchStartY > 100) {
+                    closeModal();
+                }
+            }
+        });
+        
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+        }
+    </script>
+</body>
+</html>
